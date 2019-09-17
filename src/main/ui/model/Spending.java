@@ -4,10 +4,12 @@ public class Spending {
     String category;
     int money;
 
-    public Spending(String c, int m){
-        category=c;
-        money=m;
+    public Spending(String c, int m) {
+        category = c;
+        money = m;
     }
 
-
+    public int getMoney() {
+        return money;
+    }
 }

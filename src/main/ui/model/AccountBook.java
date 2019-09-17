@@ -2,11 +2,10 @@ package ui.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import ui.model.Spending;
 
 public class AccountBook {
 
-    public static int limit=1000;
+    public static int limit = 1000;
 
     private List<Spending> accountbook;
     private int spendings;
@@ -19,7 +18,7 @@ public class AccountBook {
 
     //MODIFIES: this
     //EFFECTS: Add new spending to the account book
-    public void addSpending(Spending spending){
+    public void addSpending(Spending spending) {
         accountbook.add(spending);
     }
 
@@ -30,11 +29,12 @@ public class AccountBook {
             System.out.println("Today you have spent:" + totalSpendings(accountbook) + "dollar.");
         }
     }
+
     //MODIFIES: spendings
     //EFFECTS: Adding up whole spending
-    private int  totalSpendings(List<Spending> theList){
-        for(Spending s:theList){
-            spendings=spendings+s.getMoney();
+    private int totalSpendings(List<Spending> theList) {
+        for (Spending s : theList) {
+            spendings = spendings + s.getMoney();
         }
         return spendings;
     }
