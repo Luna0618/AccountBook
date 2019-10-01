@@ -26,18 +26,26 @@ public class InterfaceTest {
 
     }
 
-    @Test
-    public void testProcessOperation() throws IOException {
-        assertEquals("testInput", inputable.processOperation("testInput"));
+    public String testInputable(Inputable i) throws IOException {
+        return i.processOperation("testInput");
+    }
 
+    public List<String> testSavable(Savable s) throws IOException {
+        return s.save();
     }
 
     @Test
-    public void testSavable() throws IOException {
+    public void testProcessOperation() throws IOException {
+        assertEquals("testInput",testInputable(inputable));
+    }
+
+
+    @Test
+    public void testSave() throws IOException {
         Spending s1 = new Spending("testSavable",10);
         ab.addSpending(s1);
         String testString = "testSavable 10";
-        List<String> testList = savable.save();
+        List<String> testList = testSavable(savable);
         assertTrue(testList.contains(testString));
     }
 }
