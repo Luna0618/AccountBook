@@ -55,4 +55,14 @@ public class AccountBookTest {
         accountBook.exceedLimit();
         assertEquals("You cannot spend more money!",accountBook.getPrintOut());
     }
+
+   @Test
+    public void testSpendingForCategory() {
+        assertEquals(0, accountBook.spendingForCategory("food"));
+        accountBook.addSpending(s1);
+        accountBook.addSpending(s2);
+        assertEquals(10, accountBook.spendingForCategory("food"));
+        assertEquals(2000, accountBook.spendingForCategory("tuitionFee"));
+
+    }
 }

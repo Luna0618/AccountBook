@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AccountBook {
 
-    public static final int LIMIT = 1000;
+    private static final int LIMIT = 1000;
 
     private ArrayList<Spending> accountBook;
     private int totalSpending = 0;
@@ -42,6 +42,15 @@ public class AccountBook {
         System.out.println(printOut);
     }
 
+    public int spendingForCategory(String category) {
+        int spendingForCategory = 0;
+        for (Spending s : accountBook) {
+            if (s.getCategory().equals(category)) {
+                spendingForCategory = spendingForCategory + s.getMoney();
+            }
+        }
+        return spendingForCategory;
+    }
 
 
     //EFFECTS: Return the accountBook in AccountBook.
@@ -58,4 +67,8 @@ public class AccountBook {
     public String getPrintOut() {
         return printOut;
     }
+
+
+
+
 }

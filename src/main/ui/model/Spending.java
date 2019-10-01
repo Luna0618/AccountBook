@@ -1,8 +1,8 @@
 package ui.model;
 
 public class Spending {
-    String category;
-    int money;
+    private String category;
+    private int money;
 
     public Spending(String c, int m) {
         category = c;
@@ -11,5 +11,9 @@ public class Spending {
 
     public int getMoney() {
         return money;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }
