@@ -16,18 +16,24 @@ public class ProcessOperation implements Savable, Inputable {
     private Scanner scanner;
     private String category;
     private AccountBook accountBook = new AccountBook();
+    private List<String> loadData;
 
-    public String processOperation(String operation) throws IOException {
-        if (operation.equals("1")) {
-            processAddSpending();
-        } else if (operation.equals("2")) {
-            processViewSpending();
-        } else if (operation.equals("3")) {
-            accountBook.exceedLimit();
-        } else if (operation.equals("quit")) {
-            save();
+    public void processOperation() throws IOException {
+        loadData = load();
+        while (true) {
+            String operation = getUserInput();
+            if (operation.equals("1")) {
+                processAddSpending();
+            } else if (operation.equals("2")) {
+                processViewSpending();
+            } else if (operation.equals("3")) {
+                accountBook.exceedLimit();
+            } else if (operation.equals("quit")) {
+                save();
+                break;
+            }
         }
-        return operation;
+
     }
 
     public String getUserInput() {
@@ -60,15 +66,25 @@ public class ProcessOperation implements Savable, Inputable {
         }
     }
 
+    public List<String> load() throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get("./data/AccountBook.txt"));
+        for (String line : lines) {
+            ArrayList<String> partsOfLine;
+            partsOfLine = splitOnSpace(line);
+            Spending loadSpending = new Spending(partsOfLine.get(0),Integer.parseInt(partsOfLine.get(1)));
+            accountBook.addSpending(loadSpending);
+        }
+        return lines;
+    }
+
     @Override
     public List<String> save() throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get("./data/AccountBook.txt"));
         PrintWriter writer = new PrintWriter("./data/AccountBook.txt", "UTF-8");
         for (Spending s : accountBook.getAccountBook()) {
             String newLine = s.getCategory() + " " + s.getMoney();
-            lines.add(newLine);
+            loadData.add(newLine);
         }
-        for (String line : lines) {
+        for (String line : loadData) {
             ArrayList<String> partsOfLine;
             partsOfLine = splitOnSpace(line);
             System.out.print("Category: " + partsOfLine.get(0) + " ");
@@ -76,7 +92,7 @@ public class ProcessOperation implements Savable, Inputable {
             writer.println(line);
         }
         writer.close();
-        return lines;
+        return loadData;
     }
 
     @Override
@@ -92,7 +108,7 @@ public class ProcessOperation implements Savable, Inputable {
 
     public static void main(String[] args) throws IOException {
         ProcessOperation po = new ProcessOperation();
-        po.processOperation(po.getUserInput());
+        po.processOperation();
 
     }
 }
