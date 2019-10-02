@@ -5,23 +5,20 @@ import org.junit.jupiter.api.Test;
 import ui.ProcessOperation;
 import ui.Savable;
 import ui.model.AccountBook;
-import ui.Inputable;
 import ui.model.Spending;
 
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InterfaceTest {
     Savable savable;
-    Inputable inputable;
     AccountBook ab;
 
     @BeforeEach
     public void setUp() {
         savable = new ProcessOperation();
-        inputable = new ProcessOperation();
         ab = savable.getData();
 
     }
