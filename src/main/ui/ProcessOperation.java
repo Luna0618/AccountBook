@@ -12,16 +12,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProcessOperation implements Savable, Inputable {
+public class ProcessOperation implements Savable {
     private Scanner scanner;
-    private String category;
     private AccountBook accountBook = new AccountBook();
     private List<String> loadData;
 
     public void processOperation() throws IOException {
         loadData = load();
+
         while (true) {
-            String operation = getUserInput();
+            System.out.println("Type 1 to add spending, 2 to view spending, 3 to check if exceed limit,quit to save.");
+            scanner = new Scanner(System.in);
+            String operation = scanner.nextLine();
             if (operation.equals("1")) {
                 processAddSpending();
             } else if (operation.equals("2")) {
@@ -36,15 +38,9 @@ public class ProcessOperation implements Savable, Inputable {
 
     }
 
-    public String getUserInput() {
-        System.out.println("Type 1 to add spending, 2 to view spending, 3 to check if exceed limit,quit to save.");
-        scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
     private void processAddSpending() {
         System.out.println("Type in the category of the spending:");
-        category = scanner.nextLine();
+        String category = scanner.nextLine();
         System.out.println("Type in the amount of spending:");
         String amountStr = scanner.nextLine();
         int amountInt = Integer.parseInt(amountStr);
@@ -60,7 +56,7 @@ public class ProcessOperation implements Savable, Inputable {
             accountBook.viewSpending();
         } else if (operation.equals("2")) {
             System.out.println("Which category you want to view?");
-            category = scanner.nextLine();
+            String category = scanner.nextLine();
             System.out.println("You spend " + accountBook.spendingForCategory(category) + " for " + category);
 
         }
@@ -71,7 +67,7 @@ public class ProcessOperation implements Savable, Inputable {
         for (String line : lines) {
             ArrayList<String> partsOfLine;
             partsOfLine = splitOnSpace(line);
-            Spending loadSpending = new Spending(partsOfLine.get(0),Integer.parseInt(partsOfLine.get(1)));
+            Spending loadSpending = new Spending(partsOfLine.get(0), Integer.parseInt(partsOfLine.get(1)));
             accountBook.addSpending(loadSpending);
         }
         return lines;
