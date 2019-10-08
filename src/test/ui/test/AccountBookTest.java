@@ -80,17 +80,19 @@ public class AccountBookTest {
 
    @Test
     public void testForCategory() {
-        assertEquals(0, expense.forCategory("food"));
+        Expense expense = new Expense();
+        Income income = new Income();
+        assertEquals(0, expense.view("food"));
         expense.add(s1);
         expense.add(s2);
-        assertEquals(10, expense.forCategory("food"));
-        assertEquals(2000, expense.forCategory("tuitionFee"));
+        assertEquals(10, expense.view("food"));
+        assertEquals(2000, expense.view("tuitionFee"));
 
-       assertEquals(0, income.forCategory("food"));
+       assertEquals(0, income.view("food"));
        income.add(s1);
        income.add(s2);
-       assertEquals(10, income.forCategory("food"));
-       assertEquals(2000, income.forCategory("tuitionFee"));
+       assertEquals(10, income.view("food"));
+       assertEquals(2000, income.view("tuitionFee"));
    }
 
    @Test

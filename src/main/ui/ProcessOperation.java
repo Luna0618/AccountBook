@@ -86,7 +86,7 @@ public class ProcessOperation implements Savable {
         } else if (operation.equals("2")) {
             System.out.println("Which category you want to view?");
             String category = scanner.nextLine();
-            expense.forCategory(category);
+            expense.view(category);
         }
         expense.exceedLimit();
     }
@@ -102,7 +102,7 @@ public class ProcessOperation implements Savable {
         } else if (operation.equals("2")) {
             System.out.println("Which category you want to view?");
             String category = scanner.nextLine();
-            income.forCategory(category);
+            income.view(category);
         }
     }
 

@@ -13,8 +13,7 @@ public class Income extends AccountBook {
         return printOut;
     }
 
-    @Override
-    public int forCategory(String category) {
+    public int view(String category) {
         int forCategory = 0;
         for (Money s : monies) {
             if (s.getCategory().equals(category)) {
