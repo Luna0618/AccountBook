@@ -18,6 +18,9 @@ public class AccountBookTest {
     List<Money> moniesIncome;
     Money s1;
     Money s2;
+    Money s3;
+    Money s4;
+
 
 
 
@@ -29,6 +32,8 @@ public class AccountBookTest {
         moniesIncome = income.getMonies();
         s1 = new Money("food",10);
         s2 = new Money("tuitionFee",2000);
+        s3 = new Money("borrow", 100);
+        s4 = new Money("lend", 100);
 
     }
 
@@ -86,6 +91,26 @@ public class AccountBookTest {
        income.add(s2);
        assertEquals(10, income.forCategory("food"));
        assertEquals(2000, income.forCategory("tuitionFee"));
+   }
+
+   @Test
+    public void testBorrowAndLend() {
+        assertEquals(0,income.borrowAndLend());
+        income.add(s1);
+        assertEquals(0,income.borrowAndLend());
+        income.add(s3);
+        assertEquals(100,income.borrowAndLend());
+        income.add(s4);
+        assertEquals(100,income.borrowAndLend());
+
+
+       assertEquals(0,expense.borrowAndLend());
+       expense.add(s1);
+       assertEquals(0,expense.borrowAndLend());
+       expense.add(s3);
+       assertEquals(0,expense.borrowAndLend());
+       expense.add(s4);
+       assertEquals(100,expense.borrowAndLend());
 
    }
 }

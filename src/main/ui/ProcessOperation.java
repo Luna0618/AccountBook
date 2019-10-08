@@ -82,6 +82,7 @@ public class ProcessOperation implements Savable {
         operation = scanner.nextLine();
         if (operation.equals("1")) {
             expense.view();
+            expense.borrowAndLend();
         } else if (operation.equals("2")) {
             System.out.println("Which category you want to view?");
             String category = scanner.nextLine();
@@ -97,6 +98,7 @@ public class ProcessOperation implements Savable {
         operation = scanner.nextLine();
         if (operation.equals("1")) {
             income.view();
+            income.borrowAndLend();
         } else if (operation.equals("2")) {
             System.out.println("Which category you want to view?");
             String category = scanner.nextLine();

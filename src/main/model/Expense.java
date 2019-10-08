@@ -28,6 +28,18 @@ public class Expense extends AccountBook {
         return forCategory;
     }
 
+    public int borrowAndLend() {
+        int borrowAndLend = 0;
+        for (Money m:monies) {
+            if (m.getCategory().equals("lend")) {
+                borrowAndLend = borrowAndLend + m.getMoney();
+            }
+        }
+        System.out.println("You have lend friends:" + borrowAndLend + " dollars.");
+        return borrowAndLend;
+    }
+
+
     //EFFECTS: Check if the total expense exceed the limit.
     public String exceedLimit() {
         String printOut;

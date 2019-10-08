@@ -24,4 +24,15 @@ public class Income extends AccountBook {
         System.out.println("You have earned: " + forCategory + " dollars" + " for category: " + category);
         return forCategory;
     }
+
+    public int borrowAndLend() {
+        int borrowAndLend = 0;
+        for (Money m:monies) {
+            if (m.getCategory().equals("borrow")) {
+                borrowAndLend = borrowAndLend + m.getMoney();
+            }
+        }
+        System.out.println("Don't forget to pay back friends:" + borrowAndLend + " dollars.");
+        return borrowAndLend;
+    }
 }

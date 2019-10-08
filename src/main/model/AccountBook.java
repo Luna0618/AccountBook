@@ -34,5 +34,6 @@ public abstract class AccountBook {
         return totalMoney;
     }
 
+    public abstract int borrowAndLend();
 
 }
