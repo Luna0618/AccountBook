@@ -12,13 +12,14 @@ public class Income extends AccountBook {
     }
 
     @Override
-    public void forCategory(String category) {
+    public int forCategory(String category) {
         int forCategory = 0;
         for (Money s : monies) {
             if (s.getCategory().equals(category)) {
                 forCategory = forCategory + s.getMoney();
             }
         }
-        System.out.println("You have earned: " + forCategory + " dollars.");
+        System.out.println("You have earned: " + forCategory + " dollars" + " for category: " + category);
+        return forCategory;
     }
 }

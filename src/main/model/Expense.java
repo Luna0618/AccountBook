@@ -15,14 +15,15 @@ public class Expense extends AccountBook {
     }
 
     @Override
-    public void forCategory(String category) {
+    public int forCategory(String category) {
         int forCategory = 0;
         for (Money s : monies) {
             if (s.getCategory().equals(category)) {
                 forCategory = forCategory + s.getMoney();
             }
         }
-        System.out.println("You have spent: " + forCategory + " dollars.");
+        System.out.println("You have spent: " + forCategory + " dollars" + " for category: " + category);
+        return forCategory;
     }
 
     //EFFECTS: Check if the total expense exceed the limit.

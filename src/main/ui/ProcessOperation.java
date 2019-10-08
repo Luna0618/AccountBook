@@ -112,7 +112,6 @@ public class ProcessOperation implements Savable {
             Money loadMoney = new Money(partsOfLine.get(0),
                     Integer.parseInt(partsOfLine.get(1)));
             expense.add(loadMoney);
-
         }
         return lines;
     }

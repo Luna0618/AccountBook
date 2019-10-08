@@ -23,7 +23,7 @@ public abstract class AccountBook {
     public abstract void view();
 
     // EFFECTS: print out the total expense/income for given category
-    public abstract void forCategory(String category);
+    public abstract int forCategory(String category);
 
     //EFFECTS: Return the monies ArrayList in AccountBook.
     public ArrayList<Money> getMonies() {
