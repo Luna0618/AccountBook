@@ -10,8 +10,10 @@ public class Expense extends AccountBook {
     }
 
     @Override
-    public void view() {
-        System.out.println("Today you have spent:" + totalMoney + " dollar.");
+    public String view() {
+        String printOut = "Today you have spent: " + totalMoney + " dollar.";
+        System.out.println(printOut);
+        return printOut;
     }
 
     @Override
@@ -27,12 +29,14 @@ public class Expense extends AccountBook {
     }
 
     //EFFECTS: Check if the total expense exceed the limit.
-    public void exceedLimit() {
+    public String exceedLimit() {
+        String printOut;
         if (totalMoney < LIMIT) {
             printOut = "You haven't exceed the limit!";
         } else {
             printOut = "You cannot spend more money!";
         }
         System.out.println(printOut);
+        return printOut;
     }
 }

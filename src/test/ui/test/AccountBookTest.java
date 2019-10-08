@@ -2,6 +2,7 @@ package ui.test;
 
 import model.AccountBook;
 import model.Expense;
+import model.Income;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import model.Money;
@@ -11,8 +12,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AccountBookTest {
-    AccountBook accountBook;
-    List<Money> monies;
+    AccountBook expense;
+    AccountBook income;
+    List<Money> moniesExpense;
+    List<Money> moniesIncome;
     Money s1;
     Money s2;
 
@@ -20,8 +23,10 @@ public class AccountBookTest {
 
     @BeforeEach
     public void setup() {
-        accountBook = new Expense();
-        monies = accountBook.getMonies();
+        expense = new Expense();
+        income = new Income();
+        moniesExpense = expense.getMonies();
+        moniesIncome = income.getMonies();
         s1 = new Money("food",10);
         s2 = new Money("tuitionFee",2000);
 
@@ -29,42 +34,58 @@ public class AccountBookTest {
 
     @Test
     public void testAdd() {
-        assertEquals(0,monies.size());
-        accountBook.add(s1);
-        assertEquals(1, monies.size());
-        accountBook.add(s2);
-        assertEquals(2, monies.size());
+        assertEquals(0, moniesExpense.size());
+        expense.add(s1);
+        assertEquals(1, moniesExpense.size());
+        expense.add(s2);
+        assertEquals(2, moniesExpense.size());
+
+        assertEquals(0, moniesIncome.size());
+        income.add(s1);
+        assertEquals(1, moniesIncome.size());
+        income.add(s2);
+        assertEquals(2, moniesIncome.size());
     }
 
     @Test
     public void testView() {
-        assertEquals(0,accountBook.getTotalMoney());
-        accountBook.add(s1);
-        assertEquals(10, accountBook.getTotalMoney());
-        accountBook.add(s2);
-        assertEquals(2010, accountBook.getTotalMoney());
+        assertEquals("Today you have spent: 0 dollar.", expense.view());
+        expense.add(s1);
+        assertEquals("Today you have spent: 10 dollar.", expense.view());
+        expense.add(s2);
+        assertEquals("Today you have spent: 2010 dollar.", expense.view());
+
+        assertEquals("Today you have earned: 0 dollar.", income.view());
+        income.add(s1);
+        assertEquals("Today you have earned: 10 dollar.", income.view());
+        income.add(s2);
+        assertEquals("Today you have earned: 2010 dollar.", income.view());
 
     }
 
     @Test
     public void testExceedLimit() {
         Expense expense = new Expense();
-        assertEquals("",expense.getPrintOut());
+        assertEquals("You haven't exceed the limit!",expense.exceedLimit());
         expense.add(s1);
-        expense.exceedLimit();
-        assertEquals("You haven't exceed the limit!", expense.getPrintOut());
+        assertEquals("You haven't exceed the limit!", expense.exceedLimit());
         expense.add(s2);
-        expense.exceedLimit();
-        assertEquals("You cannot spend more money!", expense.getPrintOut());
+        assertEquals("You cannot spend more money!", expense.exceedLimit());
     }
 
    @Test
     public void testForCategory() {
-        assertEquals(0, accountBook.forCategory("food"));
-        accountBook.add(s1);
-        accountBook.add(s2);
-        assertEquals(10, accountBook.forCategory("food"));
-        assertEquals(2000, accountBook.forCategory("tuitionFee"));
+        assertEquals(0, expense.forCategory("food"));
+        expense.add(s1);
+        expense.add(s2);
+        assertEquals(10, expense.forCategory("food"));
+        assertEquals(2000, expense.forCategory("tuitionFee"));
 
-    }
+       assertEquals(0, income.forCategory("food"));
+       income.add(s1);
+       income.add(s2);
+       assertEquals(10, income.forCategory("food"));
+       assertEquals(2000, income.forCategory("tuitionFee"));
+
+   }
 }

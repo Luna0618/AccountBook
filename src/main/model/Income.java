@@ -7,8 +7,10 @@ public class Income extends AccountBook {
     }
 
     @Override
-    public void view() {
-        System.out.println("Today you have earned:" + totalMoney + " dollar.");
+    public String view() {
+        String printOut = "Today you have earned: " + totalMoney + " dollar.";
+        System.out.println(printOut);
+        return printOut;
     }
 
     @Override

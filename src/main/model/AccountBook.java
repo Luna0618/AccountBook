@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public abstract class AccountBook {
     protected ArrayList<Money> monies;
     protected int totalMoney = 0;
-    protected String printOut = "";
 
     public AccountBook() {
         monies = new ArrayList<>();
@@ -20,7 +19,7 @@ public abstract class AccountBook {
 
     //REQUIRES: totalMoney >= 0
     //EFFECTS: print out total expense/income in AccountBook;
-    public abstract void view();
+    public abstract String view();
 
     // EFFECTS: print out the total expense/income for given category
     public abstract int forCategory(String category);
@@ -35,9 +34,5 @@ public abstract class AccountBook {
         return totalMoney;
     }
 
-    //EFFECTS: Return the printOut string in AccountBook.
-    public String getPrintOut() {
-        return printOut;
-    }
 
 }
