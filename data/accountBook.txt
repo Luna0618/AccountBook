@@ -1,4 +1,2 @@
-food 30
-TestLoad 30
-food 30
-food 200
+testSavable 10
+testSavable 10

@@ -1,68 +1,68 @@
 package ui.test;
 
+import model.Expense;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.model.AccountBook;
-import ui.model.Spending;
+import model.Money;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AccountBookTest {
-    AccountBook accountBook;
-    List<Spending> field;
-    Spending s1;
-    Spending s2;
+    Expense expense;
+    List<Money> field;
+    Money s1;
+    Money s2;
 
 
 
     @BeforeEach
     public void setup() {
-        accountBook = new AccountBook();
-        field = accountBook.getAccountBook();
-        s1 = new Spending("food",10);
-        s2 = new Spending("tuitionFee",2000);
+        expense = new Expense();
+        field = expense.getMonies();
+        s1 = new Money("food",10);
+        s2 = new Money("tuitionFee",2000);
 
     }
 
     @Test
     public void testAddSpending() {
         assertEquals(0,field.size());
-        accountBook.addSpending(s1);
+        expense.add(s1);
         assertEquals(1, field.size());
-        accountBook.addSpending(s2);
+        expense.add(s2);
         assertEquals(2, field.size());
     }
 
     @Test
     public void testViewSpending() {
-        assertEquals(0,accountBook.getTotalSpending());
-        accountBook.addSpending(s1);
-        assertEquals(10,accountBook.getTotalSpending());
-        accountBook.addSpending(s2);
-        assertEquals(2010,accountBook.getTotalSpending());
+        assertEquals(0, expense.getTotalMoney());
+        expense.add(s1);
+        assertEquals(10, expense.getTotalMoney());
+        expense.add(s2);
+        assertEquals(2010, expense.getTotalMoney());
 
     }
 
     @Test
     public void testExceedLimit() {
-        assertEquals("",accountBook.getPrintOut());
-        accountBook.addSpending(s1);
-        accountBook.exceedLimit();
-        assertEquals("You haven't exceed the limit!",accountBook.getPrintOut());
-        accountBook.addSpending(s2);
-        accountBook.exceedLimit();
-        assertEquals("You cannot spend more money!",accountBook.getPrintOut());
+        assertEquals("", expense.getPrintOut());
+        expense.add(s1);
+        expense.exceedLimit();
+        assertEquals("You haven't exceed the limit!", expense.getPrintOut());
+        expense.add(s2);
+        expense.exceedLimit();
+        assertEquals("You cannot spend more money!", expense.getPrintOut());
     }
 
    @Test
     public void testSpendingForCategory() {
-        assertEquals(0, accountBook.spendingForCategory("food"));
-        accountBook.addSpending(s1);
-        accountBook.addSpending(s2);
-        assertEquals(10, accountBook.spendingForCategory("food"));
-        assertEquals(2000, accountBook.spendingForCategory("tuitionFee"));
+        assertEquals(0, expense.forCategory("food"));
+        expense.add(s1);
+        expense.add(s2);
+        assertEquals(10, expense.forCategory("food"));
+        assertEquals(2000, expense.forCategory("tuitionFee"));
 
     }
 }

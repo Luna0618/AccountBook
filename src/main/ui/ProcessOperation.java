@@ -1,7 +1,8 @@
 package ui;
 
-import ui.model.AccountBook;
-import ui.model.Spending;
+import model.Expense;
+import model.Income;
+import model.Money;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,23 +14,22 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProcessOperation implements Savable {
-    private Scanner scanner;
-    private AccountBook accountBook = new AccountBook();
-    private List<String> loadData;
+    private Expense expense = new Expense();
+    private Income income = new Income();
+    private List<String> loadData = new ArrayList<>();
 
     public void processOperation() throws IOException {
         loadData = load();
-
         while (true) {
-            System.out.println("Type 1 to add spending, 2 to view spending, 3 to check if exceed limit,quit to save.");
-            scanner = new Scanner(System.in);
+            System.out.println("Type 1 to add expense, 2 to add income, 3 to view AccountBook,quit to save.");
+            Scanner scanner = new Scanner(System.in);
             String operation = scanner.nextLine();
             if (operation.equals("1")) {
-                processAddSpending();
+                addExpense();
             } else if (operation.equals("2")) {
-                processViewSpending();
+                addIncome();
             } else if (operation.equals("3")) {
-                accountBook.exceedLimit();
+                processView();
             } else if (operation.equals("quit")) {
                 save();
                 break;
@@ -38,27 +38,69 @@ public class ProcessOperation implements Savable {
 
     }
 
-    private void processAddSpending() {
-        System.out.println("Type in the category of the spending:");
+    public void addExpense() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Type in the category of money:");
         String category = scanner.nextLine();
-        System.out.println("Type in the amount of spending:");
+        System.out.println("Type in the amount of money:");
         String amountStr = scanner.nextLine();
         int amountInt = Integer.parseInt(amountStr);
-        Spending spending = new Spending(category, amountInt);
-        accountBook.addSpending(spending);
+        Money money = new Money(category, amountInt);
+        expense.add(money);
     }
 
-    private void processViewSpending() {
+    public void addIncome() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Type in the category of money:");
+        String category = scanner.nextLine();
+        System.out.println("Type in the amount of money:");
+        String amountStr = scanner.nextLine();
+        int amountInt = Integer.parseInt(amountStr);
+        Money money = new Money(category, amountInt);
+        income.add(money);
+    }
+
+    public void processView() {
+        Scanner scanner = new Scanner(System.in);
         String operation;
-        System.out.println("Type 1 to view total spending, 2 to view spending for certain category.");
+        System.out.println("Type 1 to view total money, 2 to  view expense, 3 to view income");
         operation = scanner.nextLine();
         if (operation.equals("1")) {
-            accountBook.viewSpending();
+            System.out.println("Your balance:" + (income.getTotalMoney() - expense.getTotalMoney()));
+        } else if (operation.equals("2")) {
+            processViewExpense();
+        } else if (operation.equals("3")) {
+            processViewIncome();
+        }
+
+    }
+
+    public void processViewExpense() {
+        Scanner scanner = new Scanner(System.in);
+        String operation;
+        System.out.println("Type 1 to view total spending, 2 to view spending for specific category.");
+        operation = scanner.nextLine();
+        if (operation.equals("1")) {
+            expense.view();
         } else if (operation.equals("2")) {
             System.out.println("Which category you want to view?");
             String category = scanner.nextLine();
-            System.out.println("You spend " + accountBook.spendingForCategory(category) + " for " + category);
+            expense.forCategory(category);
+        }
+        expense.exceedLimit();
+    }
 
+    public void processViewIncome() {
+        Scanner scanner = new Scanner(System.in);
+        String operation;
+        System.out.println("Type 1 to view total income, 2 to view income for specific category.");
+        operation = scanner.nextLine();
+        if (operation.equals("1")) {
+            income.view();
+        } else if (operation.equals("2")) {
+            System.out.println("Which category you want to view?");
+            String category = scanner.nextLine();
+            income.forCategory(category);
         }
     }
 
@@ -67,8 +109,10 @@ public class ProcessOperation implements Savable {
         for (String line : lines) {
             ArrayList<String> partsOfLine;
             partsOfLine = splitOnSpace(line);
-            Spending loadSpending = new Spending(partsOfLine.get(0), Integer.parseInt(partsOfLine.get(1)));
-            accountBook.addSpending(loadSpending);
+            Money loadMoney = new Money(partsOfLine.get(0),
+                    Integer.parseInt(partsOfLine.get(1)));
+            expense.add(loadMoney);
+
         }
         return lines;
     }
@@ -76,7 +120,7 @@ public class ProcessOperation implements Savable {
     @Override
     public List<String> save() throws IOException {
         PrintWriter writer = new PrintWriter("./data/AccountBook.txt", "UTF-8");
-        for (Spending s : accountBook.getAccountBook()) {
+        for (Money s : expense.getMonies()) {
             String newLine = s.getCategory() + " " + s.getMoney();
             loadData.add(newLine);
         }
@@ -91,9 +135,8 @@ public class ProcessOperation implements Savable {
         return loadData;
     }
 
-    @Override
-    public AccountBook getData() {
-        return accountBook;
+    public Expense getData() {
+        return expense;
     }
 
     private static ArrayList<String> splitOnSpace(String line) {
@@ -107,5 +150,7 @@ public class ProcessOperation implements Savable {
         po.processOperation();
 
     }
+
+
 }
 

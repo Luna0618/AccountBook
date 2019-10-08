@@ -1,10 +1,10 @@
-package ui.model;
+package model;
 
-public class Spending {
+public class Money {
     private String category;
     private int money;
 
-    public Spending(String c, int m) {
+    public Money(String c, int m) {
         category = c;
         money = m;
     }
