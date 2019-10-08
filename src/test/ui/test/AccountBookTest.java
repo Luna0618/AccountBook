@@ -1,5 +1,6 @@
 package ui.test;
 
+import model.AccountBook;
 import model.Expense;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,8 +11,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AccountBookTest {
-    Expense expense;
-    List<Money> field;
+    AccountBook accountBook;
+    List<Money> monies;
     Money s1;
     Money s2;
 
@@ -19,35 +20,36 @@ public class AccountBookTest {
 
     @BeforeEach
     public void setup() {
-        expense = new Expense();
-        field = expense.getMonies();
+        accountBook = new Expense();
+        monies = accountBook.getMonies();
         s1 = new Money("food",10);
         s2 = new Money("tuitionFee",2000);
 
     }
 
     @Test
-    public void testAddSpending() {
-        assertEquals(0,field.size());
-        expense.add(s1);
-        assertEquals(1, field.size());
-        expense.add(s2);
-        assertEquals(2, field.size());
+    public void testAdd() {
+        assertEquals(0,monies.size());
+        accountBook.add(s1);
+        assertEquals(1, monies.size());
+        accountBook.add(s2);
+        assertEquals(2, monies.size());
     }
 
     @Test
-    public void testViewSpending() {
-        assertEquals(0, expense.getTotalMoney());
-        expense.add(s1);
-        assertEquals(10, expense.getTotalMoney());
-        expense.add(s2);
-        assertEquals(2010, expense.getTotalMoney());
+    public void testView() {
+        assertEquals(0,accountBook.getTotalMoney());
+        accountBook.add(s1);
+        assertEquals(10, accountBook.getTotalMoney());
+        accountBook.add(s2);
+        assertEquals(2010, accountBook.getTotalMoney());
 
     }
 
     @Test
     public void testExceedLimit() {
-        assertEquals("", expense.getPrintOut());
+        Expense expense = new Expense();
+        assertEquals("",expense.getPrintOut());
         expense.add(s1);
         expense.exceedLimit();
         assertEquals("You haven't exceed the limit!", expense.getPrintOut());
@@ -57,12 +59,12 @@ public class AccountBookTest {
     }
 
    @Test
-    public void testSpendingForCategory() {
-        assertEquals(0, expense.forCategory("food"));
-        expense.add(s1);
-        expense.add(s2);
-        assertEquals(10, expense.forCategory("food"));
-        assertEquals(2000, expense.forCategory("tuitionFee"));
+    public void testForCategory() {
+        assertEquals(0, accountBook.forCategory("food"));
+        accountBook.add(s1);
+        accountBook.add(s2);
+        assertEquals(10, accountBook.forCategory("food"));
+        assertEquals(2000, accountBook.forCategory("tuitionFee"));
 
     }
 }
