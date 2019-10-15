@@ -1,8 +1,11 @@
 package ui;
 
+import exceptions.ExceedLimitException;
+import exceptions.UnexpectedAmountException;
 import model.Expense;
 import model.Income;
 import model.Money;
+import model.Savable;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,7 +49,12 @@ public class ProcessOperation implements Savable {
         String amountStr = scanner.nextLine();
         int amountInt = Integer.parseInt(amountStr);
         Money money = new Money(category, amountInt);
-        expense.add(money);
+        try {
+            expense.add(money);
+        } catch (UnexpectedAmountException e) {
+            System.out.println("Unexpected amount!");
+
+        }
     }
 
     public void addIncome() {
@@ -57,7 +65,11 @@ public class ProcessOperation implements Savable {
         String amountStr = scanner.nextLine();
         int amountInt = Integer.parseInt(amountStr);
         Money money = new Money(category, amountInt);
-        income.add(money);
+        try {
+            income.add(money);
+        } catch (UnexpectedAmountException e) {
+            System.out.println("Unexpected amount!");
+        }
     }
 
     public void processView() {
@@ -77,9 +89,8 @@ public class ProcessOperation implements Savable {
 
     public void processViewExpense() {
         Scanner scanner = new Scanner(System.in);
-        String operation;
         System.out.println("Type 1 to view total spending, 2 to view spending for specific category.");
-        operation = scanner.nextLine();
+        String operation = scanner.nextLine();
         if (operation.equals("1")) {
             expense.view();
             expense.borrowAndLend();
@@ -88,7 +99,13 @@ public class ProcessOperation implements Savable {
             String category = scanner.nextLine();
             expense.view(category);
         }
-        expense.exceedLimit();
+        try {
+            expense.exceedLimit();
+        } catch (ExceedLimitException e) {
+            System.out.println("You have exceed the limit!");
+        } finally {
+            System.out.println("Manage your money wisely!");
+        }
     }
 
     public void processViewIncome() {
@@ -113,7 +130,11 @@ public class ProcessOperation implements Savable {
             partsOfLine = splitOnSpace(line);
             Money loadMoney = new Money(partsOfLine.get(0),
                     Integer.parseInt(partsOfLine.get(1)));
-            expense.add(loadMoney);
+            try {
+                expense.add(loadMoney);
+            } catch (UnexpectedAmountException e) {
+                System.out.println("Unexpected amount!");
+            }
         }
         return lines;
     }

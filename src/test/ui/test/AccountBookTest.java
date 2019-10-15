@@ -1,11 +1,13 @@
 package ui.test;
 
+import exceptions.NegativeMoneyException;
+import exceptions.UnexpectedAmountException;
 import model.AccountBook;
 import model.Expense;
 import model.Income;
+import model.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import model.Money;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class AccountBookTest {
     }
 
     @Test
-    public void testAdd() {
+    public void testAdd() throws UnexpectedAmountException {
         assertEquals(0, moniesExpense.size());
         expense.add(s1);
         assertEquals(1, moniesExpense.size());
@@ -53,7 +55,7 @@ public class AccountBookTest {
     }
 
     @Test
-    public void testView() {
+    public void testView() throws NegativeMoneyException {
         assertEquals("Today you have spent: 0 dollar.", expense.view());
         expense.add(s1);
         assertEquals("Today you have spent: 10 dollar.", expense.view());
@@ -68,18 +70,8 @@ public class AccountBookTest {
 
     }
 
-    @Test
-    public void testExceedLimit() {
-        Expense expense = new Expense();
-        assertEquals("You haven't exceed the limit!",expense.exceedLimit());
-        expense.add(s1);
-        assertEquals("You haven't exceed the limit!", expense.exceedLimit());
-        expense.add(s2);
-        assertEquals("You cannot spend more money!", expense.exceedLimit());
-    }
-
    @Test
-    public void testForCategory() {
+    public void testForCategory() throws NegativeMoneyException {
         Expense expense = new Expense();
         Income income = new Income();
         assertEquals(0, expense.view("food"));
@@ -96,7 +88,7 @@ public class AccountBookTest {
    }
 
    @Test
-    public void testBorrowAndLend() {
+    public void testBorrowAndLend() throws NegativeMoneyException {
         assertEquals(0,income.borrowAndLend());
         income.add(s1);
         assertEquals(0,income.borrowAndLend());

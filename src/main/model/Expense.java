@@ -1,7 +1,10 @@
 package model;
 
+import exceptions.ExceedLimitException;
+
 public class Expense extends AccountBook {
     private static final int LIMIT = 1000;
+
 
 
     //EFFECTS: Expense is empty
@@ -41,14 +44,11 @@ public class Expense extends AccountBook {
 
 
     //EFFECTS: Check if the total expense exceed the limit.
-    public String exceedLimit() {
-        String printOut;
+    public void exceedLimit() throws ExceedLimitException {
         if (totalMoney < LIMIT) {
-            printOut = "You haven't exceed the limit!";
+            System.out.println("You haven't exceed the limit!");
         } else {
-            printOut = "You cannot spend more money!";
+            throw new ExceedLimitException();
         }
-        System.out.println(printOut);
-        return printOut;
     }
 }

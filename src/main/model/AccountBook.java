@@ -1,10 +1,13 @@
 package model;
 
+import exceptions.NegativeMoneyException;
+
 import java.util.ArrayList;
 
 public abstract class AccountBook {
     protected ArrayList<Money> monies;
     protected int totalMoney = 0;
+
 
     public AccountBook() {
         monies = new ArrayList<>();
@@ -12,12 +15,15 @@ public abstract class AccountBook {
 
     //MODIFIES: this, money
     //EFFECTS: Add new money to AccountBook
-    public void add(Money money) {
-        monies.add(money);
-        totalMoney = totalMoney + money.getMoney();
+    public void add(Money money) throws NegativeMoneyException {
+        if (money.getMoney() < 0) {
+            throw new NegativeMoneyException();
+        } else {
+            monies.add(money);
+            totalMoney = totalMoney + money.getMoney();
+        }
     }
 
-    //REQUIRES: totalMoney >= 0
     //EFFECTS: print out total expense/income in AccountBook;
     public abstract String view();
 
