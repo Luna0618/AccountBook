@@ -1,9 +1,8 @@
-package ui.test;
+package exception;
 
 import exceptions.ExceedLimitException;
 import exceptions.NegativeMoneyException;
 import model.Expense;
-import model.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +18,9 @@ public class ExceptionTest {
 
     @Test
     public void testAddNoException() {
-        Money testExpense = new Money("food",10);
+
         try{
-            accountBook.add(testExpense);
+            accountBook.add("food",10);
         } catch (NegativeMoneyException e) {
             fail("Shouldn't throw exception!");
         }
@@ -29,9 +28,8 @@ public class ExceptionTest {
 
     @Test
     public void testAddNegativeException() {
-        Money testMoney = new Money("food", -10);
         try {
-            accountBook.add(testMoney);
+            accountBook.add("food" ,-10);
             fail("Didn't throw exception!");
         } catch (NegativeMoneyException e) {
 
@@ -40,8 +38,8 @@ public class ExceptionTest {
 
     @Test
     public void testExceedNoException() throws NegativeMoneyException {
-        Money testMoney = new Money("food" ,10);
-        accountBook.add(testMoney);
+
+        accountBook.add("food", 10);
         try {
             accountBook.exceedLimit();
         } catch (ExceedLimitException e) {
@@ -51,8 +49,8 @@ public class ExceptionTest {
 
     @Test
     public void testExceedException() throws NegativeMoneyException {
-        Money testMoney = new Money("food" ,5000);
-        accountBook.add(testMoney);
+
+        accountBook.add("food", 5000);
         try {
             accountBook.exceedLimit();
             fail("Didn't throw exception!");

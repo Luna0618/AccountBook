@@ -14,21 +14,21 @@ public class Income extends AccountBook {
     }
 
     public int view(String category) {
-        int forCategory = 0;
-        for (Money s : monies) {
-            if (s.getCategory().equals(category)) {
-                forCategory = forCategory + s.getMoney();
+        int moneyForCategory = 0;
+        if (monies.keySet().contains(category)) {
+            for (int i : monies.get(category)) {
+                moneyForCategory = moneyForCategory + i;
             }
         }
-        System.out.println("You have earned: " + forCategory + " dollars" + " for category: " + category);
-        return forCategory;
+        System.out.println("You have earned: " + moneyForCategory + " dollars" + " for category: " + category);
+        return moneyForCategory;
     }
 
     public int borrowAndLend() {
         int borrowAndLend = 0;
-        for (Money m:monies) {
-            if (m.getCategory().equals("borrow")) {
-                borrowAndLend = borrowAndLend + m.getMoney();
+        if (monies.keySet().contains("borrow")) {
+            for (int i : monies.get("borrow")) {
+                borrowAndLend = borrowAndLend + i;
             }
         }
         System.out.println("Don't forget to pay back friends:" + borrowAndLend + " dollars.");

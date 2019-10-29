@@ -1,12 +1,9 @@
-package ui.test;
+package model;
 
 import exceptions.NegativeMoneyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.ProcessOperation;
-import model.Savable;
-import model.Money;
-import model.Expense;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,8 +19,7 @@ public class InterfaceTest {
     public void setUp() throws NegativeMoneyException {
         savable = new ProcessOperation();
         Expense ab = savable.getData();
-        Money s1 = new Money("testSavable",10);
-        ab.add(s1);
+        ab.add("testSavable", 10);
         testString = "testSavable 10";
     }
     public List<String> testSavable(Savable s) throws IOException {

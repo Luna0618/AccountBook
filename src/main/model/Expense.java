@@ -6,7 +6,6 @@ public class Expense extends AccountBook {
     private static final int LIMIT = 1000;
 
 
-
     //EFFECTS: Expense is empty
     public Expense() {
         super();
@@ -22,9 +21,9 @@ public class Expense extends AccountBook {
 
     public int view(String category) {
         int forCategory = 0;
-        for (Money s : monies) {
-            if (s.getCategory().equals(category)) {
-                forCategory = forCategory + s.getMoney();
+        if (monies.keySet().contains(category)) {
+            for (int i : monies.get(category)) {
+                forCategory = forCategory + i;
             }
         }
         System.out.println("You have spent: " + forCategory + " dollars" + " for category: " + category);
@@ -33,9 +32,9 @@ public class Expense extends AccountBook {
 
     public int borrowAndLend() {
         int borrowAndLend = 0;
-        for (Money m:monies) {
-            if (m.getCategory().equals("lend")) {
-                borrowAndLend = borrowAndLend + m.getMoney();
+        if (monies.keySet().contains("lend")) {
+            for (int i : monies.get("lend")) {
+                borrowAndLend = borrowAndLend + i;
             }
         }
         System.out.println("You have lend friends:" + borrowAndLend + " dollars.");

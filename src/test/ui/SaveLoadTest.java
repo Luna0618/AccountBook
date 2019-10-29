@@ -1,11 +1,9 @@
-package ui.test;
+package ui;
 
 import exceptions.NegativeMoneyException;
 import model.Expense;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.ProcessOperation;
-import model.Money;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,8 +19,7 @@ public class SaveLoadTest {
     public void setUp() throws NegativeMoneyException {
         po = new ProcessOperation();
         ab = po.getData();
-        Money s1 = new Money("testSavable",10);
-        ab.add(s1);
+        ab.add("testSavable", 10);
         testString = "testSavable 10";
     }
     @Test
