@@ -10,10 +10,10 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MoneyListTest {
-    MoneyList expense;
-    MoneyList income;
-    HashMap moniesExpense;
-    HashMap moniesIncome;
+    private MoneyList expense;
+    private MoneyList income;
+    private HashMap moniesExpense;
+    private HashMap moniesIncome;
 
 
 
@@ -33,12 +33,32 @@ public class MoneyListTest {
         assertEquals(1, moniesExpense.size());
         expense.add("tuitionFee", 2000);
         assertEquals(2, moniesExpense.size());
+        assertEquals(2010,expense.getTotalMoney());
 
         assertEquals(0, moniesIncome.size());
         income.add("food" ,10);
         assertEquals(1, moniesIncome.size());
         income.add("tuitionFee", 2000);
         assertEquals(2, moniesIncome.size());
+        assertEquals(2010,income.getTotalMoney());
+    }
+
+    @Test
+    public void testRemove() throws NegativeMoneyException {
+        expense.add("food",10);
+        expense.add("tuitionFee",2000);
+        expense.add("food", 100);
+        expense.add("food",50);
+        expense.remove("food");
+        assertEquals(2110,expense.getTotalMoney());
+        expense.remove("tuitionFee");
+        assertEquals(110,expense.getTotalMoney());
+
+        income.add("food",10);
+        income.add("tuitionFee",2000);
+        income.add("food",50);
+        income.remove("food");
+        assertEquals(2010,income.getTotalMoney());
     }
 
     @Test

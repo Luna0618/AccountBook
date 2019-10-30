@@ -2,12 +2,12 @@ package model;
 
 import exceptions.NegativeMoneyException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Objects;
 
 public abstract class MoneyList {
-    protected HashMap<String, ArrayList<Integer>> monies;
+    protected HashMap<String, LinkedList<Integer>> monies;
     protected int totalMoney = 0;
 
 
@@ -21,8 +21,8 @@ public abstract class MoneyList {
         if (money < 0) {
             throw new NegativeMoneyException();
         } else {
-            monies.put(category, new ArrayList<>());
-            ArrayList<Integer> moneyList = monies.get(category);
+            monies.put(category, new LinkedList<>());
+            LinkedList<Integer> moneyList = monies.get(category);
             moneyList.add(money);
             totalMoney = totalMoney + money;
             System.out.println("Add money successfully!");
@@ -30,9 +30,9 @@ public abstract class MoneyList {
     }
 
     public void remove(String category) {
-        ArrayList<Integer> moneyList = monies.get(category);
-        totalMoney = totalMoney - moneyList.get(moneyList.size());
-        moneyList.remove(moneyList.size());
+        LinkedList<Integer> moneyList = monies.get(category);
+        totalMoney = totalMoney - moneyList.get(moneyList.size() - 1);
+        moneyList.remove(moneyList.size() - 1);
         System.out.println("Remove money successfully!");
     }
 
@@ -42,7 +42,7 @@ public abstract class MoneyList {
 
 
     //EFFECTS: Return the monies ArrayList in MoneyList.
-    public HashMap<String, ArrayList<Integer>> getMonies() {
+    public HashMap<String, LinkedList<Integer>> getMonies() {
         return monies;
     }
 
