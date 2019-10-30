@@ -1,14 +1,18 @@
 package model;
 
 import exceptions.ExceedLimitException;
+import ui.AccountBook;
 
-public class Expense extends AccountBook {
+public class Expense extends MoneyList {
+    private AccountBook accountBook;
+
     private static final int LIMIT = 1000;
 
 
     //EFFECTS: Expense is empty
     public Expense() {
         super();
+        accountBook = null;
     }
 
     @Override
@@ -21,7 +25,7 @@ public class Expense extends AccountBook {
 
     public int view(String category) {
         int forCategory = 0;
-        if (monies.keySet().contains(category)) {
+        if (monies.containsKey(category)) {
             for (int i : monies.get(category)) {
                 forCategory = forCategory + i;
             }
@@ -32,7 +36,7 @@ public class Expense extends AccountBook {
 
     public int borrowAndLend() {
         int borrowAndLend = 0;
-        if (monies.keySet().contains("lend")) {
+        if (monies.containsKey("lend")) {
             for (int i : monies.get("lend")) {
                 borrowAndLend = borrowAndLend + i;
             }
@@ -50,4 +54,13 @@ public class Expense extends AccountBook {
             throw new ExceedLimitException();
         }
     }
+
+    public void assignAccountBook(AccountBook accountBook) {
+        this.accountBook = accountBook;
+    }
+
+    public Expense getExpense() {
+        return accountBook.getData();
+    }
+
 }

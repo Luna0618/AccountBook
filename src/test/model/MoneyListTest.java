@@ -9,9 +9,9 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AccountBookTest {
-    AccountBook expense;
-    AccountBook income;
+public class MoneyListTest {
+    MoneyList expense;
+    MoneyList income;
     HashMap moniesExpense;
     HashMap moniesIncome;
 

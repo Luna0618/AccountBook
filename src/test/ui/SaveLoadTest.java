@@ -11,13 +11,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SaveLoadTest {
-    ProcessOperation po;
+    AccountBook po;
     Expense ab;
     String testString;
 
     @BeforeEach
     public void setUp() throws NegativeMoneyException {
-        po = new ProcessOperation();
+        po = new AccountBook();
         ab = po.getData();
         ab.add("testSavable", 10);
         testString = "testSavable 10";

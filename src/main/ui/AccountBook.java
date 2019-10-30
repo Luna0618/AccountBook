@@ -15,15 +15,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProcessOperation implements Savable {
-    private Expense expense = new Expense();
-    private Income income = new Income();
+public class AccountBook implements Savable {
+    private Expense expense;
+    private Income income;
     private List<String> loadData = new ArrayList<>();
 
     public void processOperation() throws IOException {
+        expense = new Expense();
+        income = new Income();
         loadData = load();
         while (true) {
-            System.out.println("Type 1 to add expense, 2 to add income, 3 to view AccountBook,quit to save.");
+            System.out.println("Type 1 to add expense, 2 to add income, 3 to view MoneyList,quit to save.");
             Scanner scanner = new Scanner(System.in);
             String operation = scanner.nextLine();
             if (operation.equals("1")) {
@@ -37,7 +39,6 @@ public class ProcessOperation implements Savable {
                 break;
             }
         }
-
     }
 
     public void addExpense() {
@@ -69,7 +70,7 @@ public class ProcessOperation implements Savable {
         String amountStr = scanner.nextLine();
         int amountInt = Integer.parseInt(amountStr);
         try {
-            income.add(category,amountInt);
+            income.add(category, amountInt);
         } catch (UnexpectedAmountException e) {
             System.out.println("Unexpected amount!");
         }
@@ -127,12 +128,12 @@ public class ProcessOperation implements Savable {
     }
 
     public List<String> load() throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get("./data/AccountBook.txt"));
+        List<String> lines = Files.readAllLines(Paths.get("./data/MoneyList.txt"));
         for (String line : lines) {
             ArrayList<String> partsOfLine;
             partsOfLine = splitOnSpace(line);
             try {
-                expense.add(partsOfLine.get(0),Integer.parseInt(partsOfLine.get(1)));
+                expense.add(partsOfLine.get(0), Integer.parseInt(partsOfLine.get(1)));
             } catch (UnexpectedAmountException e) {
                 System.out.println("Unexpected amount!");
             }
@@ -142,9 +143,9 @@ public class ProcessOperation implements Savable {
 
     @Override
     public List<String> save() throws IOException {
-        PrintWriter writer = new PrintWriter("./data/AccountBook.txt", "UTF-8");
-        for (String s: expense.getMonies().keySet()) {
-            for (int i: expense.getMonies().get(s)) {
+        PrintWriter writer = new PrintWriter("./data/MoneyList.txt", "UTF-8");
+        for (String s : expense.getMonies().keySet()) {
+            for (int i : expense.getMonies().get(s)) {
                 String newLine = s + " " + i;
                 loadData.add(newLine);
             }
@@ -165,6 +166,10 @@ public class ProcessOperation implements Savable {
         return expense;
     }
 
+    public Income getIncome() {
+        return income;
+    }
+
     private static ArrayList<String> splitOnSpace(String line) {
         String[] splits = line.split(" ");
         return new ArrayList<>(Arrays.asList(splits));
@@ -172,7 +177,7 @@ public class ProcessOperation implements Savable {
 
 
     public static void main(String[] args) throws IOException {
-        ProcessOperation po = new ProcessOperation();
+        AccountBook po = new AccountBook();
         po.processOperation();
 
     }

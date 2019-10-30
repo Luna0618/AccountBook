@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-public abstract class AccountBook {
+public abstract class MoneyList {
     protected HashMap<String, ArrayList<Integer>> monies;
     protected int totalMoney = 0;
 
 
-    public AccountBook() {
+    public MoneyList() {
         monies = new HashMap<>();
     }
 
     //MODIFIES: this, money
-    //EFFECTS: Add new money to AccountBook
+    //EFFECTS: Add new money to MoneyList
     public void add(String category, int money) throws NegativeMoneyException {
         if (money < 0) {
             throw new NegativeMoneyException();
@@ -37,16 +37,16 @@ public abstract class AccountBook {
     }
 
 
-    //EFFECTS: print out total expense/income in AccountBook;
+    //EFFECTS: print out total expense/income in MoneyList;
     public abstract String view();
 
 
-    //EFFECTS: Return the monies ArrayList in AccountBook.
+    //EFFECTS: Return the monies ArrayList in MoneyList.
     public HashMap<String, ArrayList<Integer>> getMonies() {
         return monies;
     }
 
-    //EFFECTS: Return the totalMoney in AccountBook.
+    //EFFECTS: Return the totalMoney in MoneyList.
     public int getTotalMoney() {
         return totalMoney;
     }
@@ -62,7 +62,7 @@ public abstract class AccountBook {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AccountBook that = (AccountBook) o;
+        MoneyList that = (MoneyList) o;
         return monies.equals(that.monies);
     }
 

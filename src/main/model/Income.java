@@ -1,9 +1,13 @@
 package model;
 
-public class Income extends AccountBook {
+import ui.AccountBook;
+
+public class Income extends MoneyList {
+    private AccountBook accountBook;
 
     public Income() {
         super();
+        accountBook = null;
     }
 
     @Override
@@ -15,7 +19,7 @@ public class Income extends AccountBook {
 
     public int view(String category) {
         int moneyForCategory = 0;
-        if (monies.keySet().contains(category)) {
+        if (monies.containsKey(category)) {
             for (int i : monies.get(category)) {
                 moneyForCategory = moneyForCategory + i;
             }
@@ -26,12 +30,20 @@ public class Income extends AccountBook {
 
     public int borrowAndLend() {
         int borrowAndLend = 0;
-        if (monies.keySet().contains("borrow")) {
+        if (monies.containsKey("borrow")) {
             for (int i : monies.get("borrow")) {
                 borrowAndLend = borrowAndLend + i;
             }
         }
         System.out.println("Don't forget to pay back friends:" + borrowAndLend + " dollars.");
         return borrowAndLend;
+    }
+
+    public void assignAccountBook(AccountBook accountBook) {
+        this.accountBook = accountBook;
+    }
+
+    public Income getIncome() {
+        return accountBook.getIncome();
     }
 }
