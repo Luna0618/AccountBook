@@ -15,9 +15,11 @@ public class AccountBookExpense {
 
     public void addExpense() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Remove the mis-adding? Type in the category");
+        System.out.println("Remove the mis-adding? Type in the category. Type skip to skip");
         String response = scanner.nextLine();
-        expense.remove(response);
+        if (! (response.equals("skip"))) {
+            expense.remove(response);
+        }
         System.out.println("Type in the category of money:");
         String category = scanner.nextLine();
         System.out.println("Type in the amount of money:");
@@ -25,10 +27,8 @@ public class AccountBookExpense {
         int amountInt = Integer.parseInt(amountStr);
         try {
             expense.add(category, amountInt);
-            expense.assignAccountBook(this);
         } catch (UnexpectedAmountException e) {
             System.out.println("Unexpected amount!");
-
         }
     }
 

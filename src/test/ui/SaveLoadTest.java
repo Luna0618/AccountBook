@@ -21,7 +21,7 @@ public class SaveLoadTest {
     }
     @Test
     public void testSave() throws IOException {
-        po.save();
+        po.load();
         List<String> testList = po.save();
         assertTrue(testList.contains(testString));
     }

@@ -13,13 +13,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountBook implements Savable {
-    private AccountBookExpense accountBookExpense;
-    private AccountBookIncome accountBookIncome;
-    private List<String> loadData;
+    private AccountBookExpense accountBookExpense = new AccountBookExpense();
+    private AccountBookIncome accountBookIncome = new AccountBookIncome();
+    private List<String> loadData = new ArrayList<>();
 
     public void processOperation() throws IOException {
-        accountBookExpense = new AccountBookExpense();
-        accountBookIncome = new AccountBookIncome();
         loadData = load();
         while (true) {
             System.out.println("Type 1 to add expense, 2 to add income, 3 to view MoneyList,quit to save.");
@@ -127,7 +125,7 @@ public class AccountBook implements Savable {
 //    }
 
     public List<String> load() throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get("./data/MoneyList.txt"));
+        List<String> lines = Files.readAllLines(Paths.get("./data/AccountBook.txt"));
         for (String line : lines) {
             ArrayList<String> partsOfLine;
             partsOfLine = splitOnSpace(line);
@@ -142,19 +140,18 @@ public class AccountBook implements Savable {
 
     @Override
     public List<String> save() throws IOException {
-        PrintWriter writer = new PrintWriter("./data/MoneyList.txt", "UTF-8");
+        PrintWriter writer = new PrintWriter("./data/AccountBook.txt", "UTF-8");
         for (String s : AccountBookExpense.getExpense().getMonies().keySet()) {
             for (int i : AccountBookExpense.getExpense().getMonies().get(s)) {
                 String newLine = s + " " + i;
                 loadData.add(newLine);
             }
-
         }
         for (String line : loadData) {
-            ArrayList<String> partsOfLine;
-            partsOfLine = splitOnSpace(line);
-            System.out.print("Category: " + partsOfLine.get(0) + " ");
-            System.out.println("Money spent: " + partsOfLine.get(1));
+//            ArrayList<String> partsOfLine;
+//            partsOfLine = splitOnSpace(line);
+//            System.out.print("Category: " + partsOfLine.get(0) + " ");
+//            System.out.println("Money spent: " + partsOfLine.get(1));
             writer.println(line);
         }
         writer.close();
