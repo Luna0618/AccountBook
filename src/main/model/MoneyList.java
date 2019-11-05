@@ -53,6 +53,15 @@ public abstract class MoneyList {
 
     public abstract int borrowAndLend();
 
+    public int moneyForCategory(String category) {
+        int moneyForCategory = 0;
+        if (monies.containsKey(category)) {
+            for (int i : monies.get(category)) {
+                moneyForCategory = moneyForCategory + i;
+            }
+        }
+        return moneyForCategory;
+    }
 
     @Override
     public boolean equals(Object o) {

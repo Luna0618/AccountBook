@@ -6,5 +6,4 @@ import java.util.List;
 public interface Savable {
     List<String> save() throws IOException;
 
-    Expense getData();
 }

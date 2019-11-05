@@ -1,10 +1,10 @@
 package model;
 
 import exceptions.ExceedLimitException;
-import ui.AccountBook;
+import ui.AccountBookExpense;
 
 public class Expense extends MoneyList {
-    private AccountBook accountBook;
+    private AccountBookExpense accountBookExpense;
 
     private static final int LIMIT = 1000;
 
@@ -12,7 +12,7 @@ public class Expense extends MoneyList {
     //EFFECTS: Expense is empty
     public Expense() {
         super();
-        accountBook = null;
+        accountBookExpense = null;
     }
 
     @Override
@@ -24,43 +24,33 @@ public class Expense extends MoneyList {
 
 
     public int view(String category) {
-        int forCategory = 0;
-        if (monies.containsKey(category)) {
-            for (int i : monies.get(category)) {
-                forCategory = forCategory + i;
-            }
-        }
+        int forCategory = moneyForCategory(category);
         System.out.println("You have spent: " + forCategory + " dollars" + " for category: " + category);
         return forCategory;
     }
 
     public int borrowAndLend() {
-        int borrowAndLend = 0;
-        if (monies.containsKey("lend")) {
-            for (int i : monies.get("lend")) {
-                borrowAndLend = borrowAndLend + i;
-            }
-        }
+        int borrowAndLend = moneyForCategory("lend");
         System.out.println("You have lend friends:" + borrowAndLend + " dollars.");
         return borrowAndLend;
     }
 
 
     //EFFECTS: Check if the total expense exceed the limit.
-    public void exceedLimit() throws ExceedLimitException {
+    public String exceedLimit() throws ExceedLimitException {
         if (totalMoney < LIMIT) {
-            System.out.println("You haven't exceed the limit!");
+            String printout = "You haven't exceed the limit!";
+            System.out.println(printout);
+            return printout;
         } else {
+            System.out.println("Exceed limit!");
             throw new ExceedLimitException();
         }
     }
 
-    public void assignAccountBook(AccountBook accountBook) {
-        this.accountBook = accountBook;
-    }
-
-    public Expense getExpense() {
-        return accountBook.getData();
+    public void assignAccountBook(AccountBookExpense  accountBookExpense) {
+        this.accountBookExpense = accountBookExpense;
+        accountBookExpense.addExpense();
     }
 
 }

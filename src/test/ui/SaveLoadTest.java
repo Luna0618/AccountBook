@@ -1,7 +1,6 @@
 package ui;
 
 import exceptions.NegativeMoneyException;
-import model.Expense;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,19 +11,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SaveLoadTest {
     AccountBook po;
-    Expense ab;
     String testString;
 
     @BeforeEach
     public void setUp() throws NegativeMoneyException {
         po = new AccountBook();
-        ab = po.getData();
-        ab.add("testSavable", 10);
+        po.getAccountBookExpense().getExpense().add("testSavable", 10);
         testString = "testSavable 10";
     }
     @Test
     public void testSave() throws IOException {
-
         po.save();
         List<String> testList = po.save();
         assertTrue(testList.contains(testString));

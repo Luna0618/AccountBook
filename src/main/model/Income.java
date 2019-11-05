@@ -1,13 +1,13 @@
 package model;
 
-import ui.AccountBook;
+import ui.AccountBookIncome;
 
 public class Income extends MoneyList {
-    private AccountBook accountBook;
+    private AccountBookIncome accountBookIncome;
 
     public Income() {
         super();
-        accountBook = null;
+        accountBookIncome = null;
     }
 
     @Override
@@ -18,32 +18,20 @@ public class Income extends MoneyList {
     }
 
     public int view(String category) {
-        int moneyForCategory = 0;
-        if (monies.containsKey(category)) {
-            for (int i : monies.get(category)) {
-                moneyForCategory = moneyForCategory + i;
-            }
-        }
+        int moneyForCategory = moneyForCategory(category);
         System.out.println("You have earned: " + moneyForCategory + " dollars" + " for category: " + category);
         return moneyForCategory;
     }
 
     public int borrowAndLend() {
-        int borrowAndLend = 0;
-        if (monies.containsKey("borrow")) {
-            for (int i : monies.get("borrow")) {
-                borrowAndLend = borrowAndLend + i;
-            }
-        }
+        int borrowAndLend = moneyForCategory("borrow");
         System.out.println("Don't forget to pay back friends:" + borrowAndLend + " dollars.");
         return borrowAndLend;
     }
 
-    public void assignAccountBook(AccountBook accountBook) {
-        this.accountBook = accountBook;
+    public void assignAccountBookIncome(AccountBookIncome accountBookIncome) {
+        this.accountBookIncome = accountBookIncome;
+        accountBookIncome.addIncome();
     }
 
-    public Income getIncome() {
-        return accountBook.getIncome();
-    }
 }
