@@ -16,7 +16,7 @@ public class SaveLoadTest {
     @BeforeEach
     public void setUp() throws NegativeMoneyException {
         po = new AccountBook();
-        po.getAccountBookExpense().getExpense().add("testSavable", 10);
+        po.getProcessExpense().getExpense().add("testSavable", 10);
         testString = "testSavable 10";
     }
     @Test

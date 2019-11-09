@@ -6,10 +6,10 @@ import model.Expense;
 
 import java.util.Scanner;
 
-public class AccountBookExpense {
+public class ProcessExpense {
     private static Expense expense;
 
-    public AccountBookExpense() {
+    public ProcessExpense() {
         expense = new Expense();
     }
 

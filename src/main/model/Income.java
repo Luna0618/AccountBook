@@ -1,13 +1,9 @@
 package model;
 
-import ui.AccountBookIncome;
-
 public class Income extends MoneyList {
-    private AccountBookIncome accountBookIncome;
 
     public Income() {
         super();
-        accountBookIncome = null;
     }
 
     @Override
@@ -29,9 +25,5 @@ public class Income extends MoneyList {
         return borrowAndLend;
     }
 
-    public void assignAccountBookIncome(AccountBookIncome accountBookIncome) {
-        this.accountBookIncome = accountBookIncome;
-        accountBookIncome.addIncome();
-    }
 
 }

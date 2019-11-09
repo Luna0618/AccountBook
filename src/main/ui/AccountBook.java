@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountBook implements Savable {
-    private AccountBookExpense accountBookExpense = new AccountBookExpense();
-    private AccountBookIncome accountBookIncome = new AccountBookIncome();
+    private ProcessExpense processExpense = new ProcessExpense();
+    private processIncome processIncome = new processIncome();
     private List<String> loadData = new ArrayList<>();
 
     public void processOperation() throws IOException {
@@ -24,9 +24,9 @@ public class AccountBook implements Savable {
             Scanner scanner = new Scanner(System.in);
             String operation = scanner.nextLine();
             if (operation.equals("1")) {
-                accountBookExpense.addExpense();
+                processExpense.addExpense();
             } else if (operation.equals("2")) {
-                accountBookIncome.addIncome();
+                processIncome.addIncome();
             } else if (operation.equals("3")) {
                 processView();
             } else if (operation.equals("quit")) {
@@ -78,12 +78,12 @@ public class AccountBook implements Savable {
         operation = scanner.nextLine();
         if (operation.equals("1")) {
             System.out.println("Your balance:"
-                    + (AccountBookIncome.getIncome().getTotalMoney()
-                    - AccountBookExpense.getExpense().getTotalMoney()));
+                    + (processIncome.getIncome().getTotalMoney()
+                    - ProcessExpense.getExpense().getTotalMoney()));
         } else if (operation.equals("2")) {
-            accountBookExpense.processViewExpense();
+            processExpense.processViewExpense();
         } else if (operation.equals("3")) {
-            accountBookIncome.processViewIncome();
+            processIncome.processViewIncome();
         }
 
     }
@@ -130,7 +130,7 @@ public class AccountBook implements Savable {
             ArrayList<String> partsOfLine;
             partsOfLine = splitOnSpace(line);
             try {
-                AccountBookExpense.getExpense().add(partsOfLine.get(0), Integer.parseInt(partsOfLine.get(1)));
+                ProcessExpense.getExpense().add(partsOfLine.get(0), Integer.parseInt(partsOfLine.get(1)));
             } catch (UnexpectedAmountException e) {
                 System.out.println("Unexpected amount!");
             }
@@ -141,8 +141,8 @@ public class AccountBook implements Savable {
     @Override
     public List<String> save() throws IOException {
         PrintWriter writer = new PrintWriter("./data/AccountBook.txt", "UTF-8");
-        for (String s : AccountBookExpense.getExpense().getMonies().keySet()) {
-            for (int i : AccountBookExpense.getExpense().getMonies().get(s)) {
+        for (String s : ProcessExpense.getExpense().getMonies().keySet()) {
+            for (int i : ProcessExpense.getExpense().getMonies().get(s)) {
                 String newLine = s + " " + i;
                 loadData.add(newLine);
             }
@@ -166,12 +166,12 @@ public class AccountBook implements Savable {
 //        return income;
 
 
-    public AccountBookExpense getAccountBookExpense() {
-        return accountBookExpense;
+    public ProcessExpense getProcessExpense() {
+        return processExpense;
     }
 
-    public AccountBookIncome getAccountBookIncome() {
-        return accountBookIncome;
+    public processIncome getProcessIncome() {
+        return processIncome;
     }
 
     private ArrayList<String> splitOnSpace(String line) {

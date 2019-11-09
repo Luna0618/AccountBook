@@ -1,10 +1,8 @@
 package model;
 
 import exceptions.ExceedLimitException;
-import ui.AccountBookExpense;
 
 public class Expense extends MoneyList {
-    private AccountBookExpense accountBookExpense;
 
     private static final int LIMIT = 1000;
 
@@ -12,7 +10,6 @@ public class Expense extends MoneyList {
     //EFFECTS: Expense is empty
     public Expense() {
         super();
-        accountBookExpense = null;
     }
 
     @Override
@@ -46,11 +43,6 @@ public class Expense extends MoneyList {
             System.out.println("Exceed limit!");
             throw new ExceedLimitException();
         }
-    }
-
-    public void assignAccountBook(AccountBookExpense  accountBookExpense) {
-        this.accountBookExpense = accountBookExpense;
-        accountBookExpense.addExpense();
     }
 
 }

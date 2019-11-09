@@ -5,10 +5,10 @@ import model.Income;
 
 import java.util.Scanner;
 
-public class AccountBookIncome {
+public class processIncome {
     private static Income income;
 
-    public AccountBookIncome() {
+    public processIncome() {
         income = new Income();
     }
 
