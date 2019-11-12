@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class AccountBook implements Savable {
     private ProcessExpense processExpense = new ProcessExpense();
-    private processIncome processIncome = new processIncome();
+    private ProcessIncome processIncome = new ProcessIncome();
     private List<String> loadData = new ArrayList<>();
 
     public void processOperation() throws IOException {
@@ -171,7 +171,7 @@ public class AccountBook implements Savable {
         return processExpense;
     }
 
-    public processIncome getProcessIncome() {
+    public ProcessIncome getProcessIncome() {
         return processIncome;
     }
 
