@@ -2,15 +2,23 @@ package ui;
 
 import exceptions.ExceedLimitException;
 import exceptions.UnexpectedAmountException;
+import model.Adult;
 import model.Expense;
+import model.Kid;
 
 import java.util.Scanner;
 
 public class ProcessExpense {
     private static Expense expense;
+    Kid me = new Kid("Me");
+    Adult dad = new Adult("Dad");
+    Adult grandpa = new Adult("grandpa");
 
     public ProcessExpense() {
         expense = new Expense();
+        expense.addObserver(grandpa);
+        grandpa.addMember(dad);
+        dad.addMember(me);
     }
 
     public void addExpense() {

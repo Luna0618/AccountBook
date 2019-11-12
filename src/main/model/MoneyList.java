@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Objects;
 
-public abstract class MoneyList {
+public abstract class MoneyList extends Subject {
     protected HashMap<String, LinkedList<Integer>> monies;
     protected int totalMoney = 0;
 
@@ -26,6 +26,7 @@ public abstract class MoneyList {
             moneyList.add(money);
             totalMoney = totalMoney + money;
             System.out.println("Add money successfully!");
+            notifyObserver(category,money);
         }
     }
 
