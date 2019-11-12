@@ -1,6 +1,7 @@
 package ui;
 
 import exceptions.UnexpectedAmountException;
+import model.ChooseAccountBook;
 import model.Savable;
 
 import java.io.IOException;
@@ -181,8 +182,12 @@ public class AccountBook implements Savable {
 
 
     public static void main(String[] args) throws IOException {
-        AccountBook ab = new AccountBook();
-        ab.processOperation();
+        System.out.println("Choose your AccountBook (Family/Personal)");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        ChooseAccountBook chooseAccountBook = new ChooseAccountBook();
+        AccountBook accountBook = chooseAccountBook.chooseAccountBook(input);
+        accountBook.processOperation();
 
     }
 

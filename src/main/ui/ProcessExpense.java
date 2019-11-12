@@ -10,15 +10,16 @@ import java.util.Scanner;
 
 public class ProcessExpense {
     private static Expense expense;
-    Kid me = new Kid("Me");
+    Kid tom = new Kid("Tom");
+    Kid peter = new Kid("Peter");
     Adult dad = new Adult("Dad");
-    Adult grandpa = new Adult("grandpa");
 
     public ProcessExpense() {
         expense = new Expense();
-        expense.addObserver(grandpa);
-        grandpa.addMember(dad);
-        dad.addMember(me);
+        expense.addObserver(dad);
+        dad.addMember(tom);
+        dad.addMember(peter);
+        System.out.println("There are " + dad.getNumberOfFamilies() + " people using the AccountBook");
     }
 
     public void addExpense() {
