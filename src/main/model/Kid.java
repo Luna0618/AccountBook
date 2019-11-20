@@ -7,6 +7,8 @@ public class Kid extends FamilyMember {
         super(name);
     }
 
+    //EFFECTS:If amount of spending exceed the kid's limit, print out "Exceed the kid's spending limit!";
+    //Otherwise print out amount + " dollars has been spent on " + category
     @Override
     public String update(String category, int amount) {
         String printOut;

@@ -26,10 +26,9 @@ public class SaveLoadTest {
         assertTrue(testList.contains(testString));
     }
 
-    @Test
-    public void testLoad() throws IOException {
-        assertTrue(po.load().contains(testString));
-
-    }
+//    @Test
+//    public void testLoad() throws IOException {
+//        assertTrue(po.load().contains(testString));
+//    }
 
 }

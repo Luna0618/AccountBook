@@ -12,6 +12,7 @@ public class Expense extends MoneyList {
         super();
     }
 
+    //EFFECTS:Print out the total amount of money of spendings
     @Override
     public String view() {
         String printOut = "Today you have spent: " + totalMoney + " dollar.";
@@ -19,13 +20,14 @@ public class Expense extends MoneyList {
         return printOut;
     }
 
-
+    //EFFECTS:Print out the amount of money for given category
     public int view(String category) {
         int forCategory = moneyForCategory(category);
         System.out.println("You have spent: " + forCategory + " dollars" + " for category: " + category);
         return forCategory;
     }
 
+    //EFFECTS:Print out the amount of money for category:lend
     public int borrowAndLend() {
         int borrowAndLend = moneyForCategory("lend");
         System.out.println("You have lend friends:" + borrowAndLend + " dollars.");

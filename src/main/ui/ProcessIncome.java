@@ -12,13 +12,10 @@ public class ProcessIncome {
         income = new Income();
     }
 
+    //MODIFIES:this
+    //EFFECTS:Add an income to Income
     public void addIncome() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Remove the mis-adding? Type in the category.Type skip tp skip.");
-        String response = scanner.nextLine();
-        if (!(response.equals("skip"))) {
-            income.remove(response);
-        }
         System.out.println("Type in the category of money:");
         String category = scanner.nextLine();
         System.out.println("Type in the amount of money:");
@@ -31,6 +28,7 @@ public class ProcessIncome {
         }
     }
 
+    //EFFECTS:If user input =="1", view total income, if user input =="2", view income for given category
     public static void processViewIncome() {
         Scanner scanner = new Scanner(System.in);
         String operation;

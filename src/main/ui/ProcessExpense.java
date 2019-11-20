@@ -13,22 +13,20 @@ public class ProcessExpense {
     Kid tom = new Kid("Tom");
     Kid peter = new Kid("Peter");
     Adult dad = new Adult("Dad");
+    Adult mom = new Adult("Mom");
 
     public ProcessExpense() {
         expense = new Expense();
         expense.addObserver(dad);
+        expense.addObserver(mom);
         dad.addMember(tom);
         dad.addMember(peter);
-        System.out.println("There are " + dad.getNumberOfFamilies() + " people using the AccountBook");
     }
 
+    //MODIFIES:this
+    //EFFECTS:Add a spending to Expense
     public void addExpense() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Remove the mis-adding? Type in the category. Type skip to skip");
-        String response = scanner.nextLine();
-        if (! (response.equals("skip"))) {
-            expense.remove(response);
-        }
         System.out.println("Type in the category of money:");
         String category = scanner.nextLine();
         System.out.println("Type in the amount of money:");
@@ -41,6 +39,7 @@ public class ProcessExpense {
         }
     }
 
+    //EFFECTS:If user input =="1", view total spending, if user input =="2", view spending for given category
     public  void processViewExpense() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type 1 to view total spending, 2 to view spending for specific category.");

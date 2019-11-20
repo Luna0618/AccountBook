@@ -59,18 +59,6 @@ public class MoneyListTest {
 //        assertEquals(2010,income.getTotalMoney());
 //    }
 
-    @Test
-    public void testRemove() throws NegativeMoneyException {
-        expense.add("food",10);
-        expense.add("tuitionFee",2000);
-        expense.add("food", 100);
-        expense.add("food",50);
-        expense.remove("food");
-        assertEquals(2110,expense.getTotalMoney());
-        expense.remove("tuitionFee");
-        assertEquals(110,expense.getTotalMoney());
-    }
-
 //    @Test
 //    public void testView() throws NegativeMoneyException {
 //        assertEquals("Today you have spent: 0 dollar.", expense.view());
@@ -133,14 +121,14 @@ public class MoneyListTest {
         assertEquals(0,expense.moneyForCategory("drinks"));
     }
 
-    @Test
-    public void testEquals() throws NegativeMoneyException {
-        Expense e2 = new Expense();
-        e2.add("food",10);
-        assertTrue(expense.equals(expense));
-        assertFalse(expense.equals(e2));
-        assertFalse(expense.equals(null));
-        assertFalse(expense.equals("expense"));
-        assertTrue(expense.equals(new Expense()));
-    }
+//    @Test
+//    public void testEquals() throws NegativeMoneyException {
+//        Expense e2 = new Expense();
+//        e2.add("food",10);
+//        assertTrue(expense.equals(expense));
+//        assertFalse(expense.equals(e2));
+//        assertFalse(expense.equals(null));
+//        assertFalse(expense.equals("expense"));
+//        assertTrue(expense.equals(new Expense()));
+//    }
 }

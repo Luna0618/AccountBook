@@ -30,19 +30,11 @@ public abstract class MoneyList extends Subject {
         }
     }
 
-    public void remove(String category) {
-        LinkedList<Integer> moneyList = monies.get(category);
-        totalMoney = totalMoney - moneyList.get(moneyList.size() - 1);
-        moneyList.remove(moneyList.size() - 1);
-        System.out.println("Remove money successfully!");
-    }
-
 
     //EFFECTS: print out total expense/income in MoneyList;
     public abstract String view();
 
 
-    //EFFECTS: Return the monies ArrayList in MoneyList.
     public HashMap<String, LinkedList<Integer>> getMonies() {
         return monies;
     }
@@ -52,9 +44,11 @@ public abstract class MoneyList extends Subject {
         return totalMoney;
     }
 
+    //EFFECTS: View the amount of money for borrow/lend
     public abstract int borrowAndLend();
 
-    public int moneyForCategory(String category) {
+    //EFFECTS:return the amount of money for given category
+    protected int moneyForCategory(String category) {
         int moneyForCategory = 0;
         if (monies.containsKey(category)) {
             for (int i : monies.get(category)) {
@@ -64,17 +58,17 @@ public abstract class MoneyList extends Subject {
         return moneyForCategory;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        MoneyList that = (MoneyList) o;
-        return monies.equals(that.monies);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) {
+//            return true;
+//        }
+//        if (o == null || getClass() != o.getClass()) {
+//            return false;
+//        }
+//        MoneyList that = (MoneyList) o;
+//        return monies.equals(that.monies);
+//    }
 
     @Override
     public int hashCode() {

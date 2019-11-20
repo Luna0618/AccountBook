@@ -11,5 +11,10 @@ public abstract class FamilyMember implements Observer {
         return name;
     }
 
-    public abstract String update(String category, int amount);
+    //EFFECTS:Print out a spending
+    public String update(String category, int amount) {
+        String printOut = amount + " dollars has been spent on " + category;
+        System.out.println(printOut);
+        return printOut;
+    }
 }

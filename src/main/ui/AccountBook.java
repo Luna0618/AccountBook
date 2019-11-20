@@ -1,7 +1,6 @@
 package ui;
 
 import exceptions.UnexpectedAmountException;
-import model.ChooseAccountBook;
 import model.Savable;
 
 import java.io.IOException;
@@ -18,10 +17,11 @@ public class AccountBook implements Savable {
     private ProcessIncome processIncome = new ProcessIncome();
     private List<String> loadData = new ArrayList<>();
 
+    //EFFECTS:Get the user input and decide the next method to execute
     public void processOperation() throws IOException {
         loadData = load();
         while (true) {
-            System.out.println("Type 1 to add expense, 2 to add income, 3 to view MoneyList,quit to save.");
+            System.out.println("Type 1 to add expense, 2 to add income, 3 to view AccountBook,quit to save.");
             Scanner scanner = new Scanner(System.in);
             String operation = scanner.nextLine();
             if (operation.equals("1")) {
@@ -37,41 +37,8 @@ public class AccountBook implements Savable {
         }
     }
 
-//    public void addExpense() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Remove the mis-adding? Type in the category");
-//        String response = scanner.nextLine();
-//        expense.remove(response);
-//        System.out.println("Type in the category of money:");
-//        String category = scanner.nextLine();
-//        System.out.println("Type in the amount of money:");
-//        String amountStr = scanner.nextLine();
-//        int amountInt = Integer.parseInt(amountStr);
-//        try {
-//            expense.add(category, amountInt);
-//        } catch (UnexpectedAmountException e) {
-//            System.out.println("Unexpected amount!");
-//
-//        }
-//    }
-
-//    public void addIncome() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Remove the mis-adding? Type in the category");
-//        String response = scanner.nextLine();
-//        expense.remove(response);
-//        System.out.println("Type in the category of money:");
-//        String category = scanner.nextLine();
-//        System.out.println("Type in the amount of money:");
-//        String amountStr = scanner.nextLine();
-//        int amountInt = Integer.parseInt(amountStr);
-//        try {
-//            income.add(category, amountInt);
-//        } catch (UnexpectedAmountException e) {
-//            System.out.println("Unexpected amount!");
-//        }
-
-
+    //EFFECTS:Get the user input. If input =="1", calculate the total balance;
+    // input =="2", view expense; input =="3",view income
     public void processView() {
         Scanner scanner = new Scanner(System.in);
         String operation;
@@ -89,42 +56,8 @@ public class AccountBook implements Savable {
 
     }
 
-//    public void processViewExpense() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Type 1 to view total spending, 2 to view spending for specific category.");
-//        String operation = scanner.nextLine();
-//        if (operation.equals("1")) {
-//            expense.view();
-//            expense.borrowAndLend();
-//        } else if (operation.equals("2")) {
-//            System.out.println("Which category you want to view?");
-//            String category = scanner.nextLine();
-//            expense.view(category);
-//        }
-//        try {
-//            expense.exceedLimit();
-//        } catch (ExceedLimitException e) {
-//            System.out.println("You have exceed the limit!");
-//        } finally {
-//            System.out.println("Manage your money wisely!");
-//        }
-//    }
-
-//    public void processViewIncome() {
-//        Scanner scanner = new Scanner(System.in);
-//        String operation;
-//        System.out.println("Type 1 to view total income, 2 to view income for specific category.");
-//        operation = scanner.nextLine();
-//        if (operation.equals("1")) {
-//            income.view();
-//            income.borrowAndLend();
-//        } else if (operation.equals("2")) {
-//            System.out.println("Which category you want to view?");
-//            String category = scanner.nextLine();
-//            income.view(category);
-//        }
-//    }
-
+    //MODIFIES:this
+    //EFFECTS:Add file data to this account book
     public List<String> load() throws IOException {
         List<String> lines = Files.readAllLines(Paths.get("./data/AccountBook.txt"));
         for (String line : lines) {
@@ -139,6 +72,7 @@ public class AccountBook implements Savable {
         return lines;
     }
 
+    //EFFECTS:Save this account book to data file
     @Override
     public List<String> save() throws IOException {
         PrintWriter writer = new PrintWriter("./data/AccountBook.txt", "UTF-8");
@@ -149,22 +83,11 @@ public class AccountBook implements Savable {
             }
         }
         for (String line : loadData) {
-//            ArrayList<String> partsOfLine;
-//            partsOfLine = splitOnSpace(line);
-//            System.out.print("Category: " + partsOfLine.get(0) + " ");
-//            System.out.println("Money spent: " + partsOfLine.get(1));
             writer.println(line);
         }
         writer.close();
         return loadData;
     }
-
-//    public Expense getData() {
-//        return expense;
-//    }
-
-//    public Income getIncome() {
-//        return income;
 
 
     public ProcessExpense getProcessExpense() {
@@ -182,13 +105,8 @@ public class AccountBook implements Savable {
 
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Choose your AccountBook (Family/Personal)");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        ChooseAccountBook chooseAccountBook = new ChooseAccountBook();
-        AccountBook accountBook = chooseAccountBook.chooseAccountBook(input);
+        AccountBook accountBook = new AccountBook();
         accountBook.processOperation();
-
     }
 
 
