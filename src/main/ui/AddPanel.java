@@ -113,7 +113,7 @@ public class AddPanel extends JPanel implements ActionListener {
 
     private void setPrintOutLabel() {
         printOutLabel = new JLabel();
-        printOutLabel.setFont(new Font("Expense", Font.BOLD, 50));
+        printOutLabel.setFont(new Font("Expense", Font.BOLD, 30));
 
     }
 
