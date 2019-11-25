@@ -58,18 +58,6 @@ public abstract class MoneyList extends Subject {
         return moneyForCategory;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) {
-//            return true;
-//        }
-//        if (o == null || getClass() != o.getClass()) {
-//            return false;
-//        }
-//        MoneyList that = (MoneyList) o;
-//        return monies.equals(that.monies);
-//    }
-
     @Override
     public int hashCode() {
         return Objects.hash(monies);
