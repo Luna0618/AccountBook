@@ -62,6 +62,7 @@ public class MainPanel extends JPanel implements ActionListener {
         viewButton.addActionListener(this);
     }
 
+    //EFFECTS: Create a new Main Panel
     public void chooseFunction() {
         //Create and set up the window.
         JFrame frame = new JFrame("What you want to do?");

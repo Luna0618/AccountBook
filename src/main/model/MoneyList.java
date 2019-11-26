@@ -21,14 +21,18 @@ public abstract class MoneyList extends Subject {
         if (money < 0) {
             throw new NegativeMoneyException();
         } else {
-            monies.put(category, new LinkedList<>());
+            if (!monies.containsKey(category)) {
+                monies.put(category, new LinkedList<>());
+            }
             LinkedList<Integer> moneyList = monies.get(category);
             moneyList.add(money);
             totalMoney = totalMoney + money;
             System.out.println("Add money successfully!");
-            notifyObserver(category,money);
+            notifyObserver(category, money);
         }
     }
+
+
 
 
     //EFFECTS: print out total expense/income in MoneyList;
