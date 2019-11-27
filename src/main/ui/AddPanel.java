@@ -24,7 +24,7 @@ public class AddPanel extends JPanel implements ActionListener {
     private Kid peter = new Kid("Peter");
     private Adult dad = new Adult("Dad");
     private Adult mom = new Adult("Mom");
-    
+
     public AddPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         this.setLayout(new GridLayout(3, 2));
