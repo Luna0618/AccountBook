@@ -1,1 +1,3 @@
-testSavable 10
+food 20
+food 20
+food 20
